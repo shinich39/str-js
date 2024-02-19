@@ -20,10 +20,10 @@ const result = strJs.isNumber("0.1");
 ```js
 const data = "Lorem ipsum dolor";
 const result = strJs.width(data, true);
-// Ｌｏｒｅｍ　ｉｐｓｕｍ　ｄｏｌｏｒ
+// "Ｌｏｒｅｍ　ｉｐｓｕｍ　ｄｏｌｏｒ"
 
 const result2 = strJs.width(result, false);
-// Lorem ipsum dolor
+// "Lorem ipsum dolor"
 ```
 
 - splitInt
@@ -88,4 +88,16 @@ const a = "Lorem ipsum dolor sit amet.";
 const b = "Lorem IPSUM dolor sit AMET.";
 const result = strJs.match(a, b);
 // 0.6666
+```
+
+- xor
+
+```js
+const str = "Lorem ipsum dolor sit amet.";
+const salt = "!@#$";
+const encrypted = strJs.xor(str, salt);
+// "m/QAL`JTR5NE/OKS`PMU`BID4"
+
+const decrypted = strJs.xor(encrypted, salt);
+// "Lorem ipsum dolor sit amet."
 ```

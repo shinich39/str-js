@@ -35,7 +35,7 @@ function toFullWidth(str) {
     'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
     '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・',
     '\゛': '\ﾞ', '\ﾟ': '\゜',
-  };
+  }
 
   return str
     .replace(/[!-~]/g, function(ch) {
@@ -199,63 +199,6 @@ function getAccuracy(a, b) {
   return (matches * 2) / (a.length + b.length);
 }
 
-// function indexesOf(str, targets) {
-//   const table = [];
-//   for (let i = 0; i < str.length + 1; i++) {
-//     table.push([]);
-//     for (let j = 0; j < targets.length + 1; j++) {
-//       table[i][j] = 0;
-//     }
-//   }
-
-//   for (let i = 0; i < targets.length; i++) {
-//     const target = targets[i];
-//     let count = 1,
-//         offset = 0,
-//         index = str.indexOf(target, offset);
-//     while(index > -1) {
-//       offset = index + target.length;
-//       for (let j = index; j < offset; j++) {
-//         table[i][j] = count;
-//       }
-//       count++;
-//       index = str.indexOf(target, offset);
-//     }
-//   }
-
-//   const result = [];
-//   let j = 0;
-//   while (j < str.length) {
-//     for (let i = 0; i < targets.length; i++) {
-//       if (table[i][j] > 0) {
-//         result.push({
-//           index: j,
-//           data: targets[i],
-//         });
-//         j += targets[i].length;
-//         break;
-//       }
-//     }
-//     j += 1;
-//   }
-
-//   return result;
-// }
-
-// function splitByIndexes(str, indexes) {
-//   const result = [""];
-//   for (let i = 0; i < str.length; i++) {
-//     const char = str.charAt(i);
-//     const index = indexes.indexOf(i);
-//     if (index > -1) {
-//       result.push(char);
-//     } else {
-//       result[result.length - 1] += char;
-//     }
-//   }
-//   return result;
-// }
-
 function compareAB(a, b) {
   
   function composeResult(n) {
@@ -315,6 +258,21 @@ function compareAB(a, b) {
   }
 }
 
+function xor(str, salt) {
+  if (salt.length < 1) {
+    return str;
+  }
+  let result = "", i = 0;
+  while(salt.length < str.length) {
+    salt += salt;
+  }
+  while(i < str.length) {
+    result += String.fromCharCode(str.charCodeAt(i) ^ salt.charCodeAt(i));
+    i++;
+  }
+  return result;
+}
+
 export default {
   isNumber: isNumber,
   splitInt: splitInt,
@@ -323,4 +281,5 @@ export default {
   compare: compareAB,
   diff: getDifferences,
   match: getAccuracy,
+  xor: xor,
 }

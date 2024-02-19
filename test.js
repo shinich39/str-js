@@ -1,8 +1,13 @@
-import strjs from './index.js';
+import strJs from './index.js';
 
-const a = "Lorem ipsum dolor 33.33 99.99 sit amet.";
-const b = "Lorem ipsum dolor 33.33 99.99 sit amet";
+const str = "Lorem ipsum dolor sit amet.";
+const salt = "!@#$";
+
+const _a = strJs.xor(str, salt);
+console.log(
+  1, _a,
+);
 
 console.log(
-  strjs.match(a, b)
-);
+  2, strJs.xor(_a, salt)
+)
